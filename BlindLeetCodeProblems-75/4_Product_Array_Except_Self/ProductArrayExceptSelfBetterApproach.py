@@ -1,31 +1,19 @@
-# if we are not stopped from diving then
+def ProductArrayExceptSelf(array):
+    n = len(array)
+    prefix = [1] * n
+    suffix = [1] * n
+    ans = [1] * n
 
-# what we will do is - we will multiply all the elements and then divide the product by each element
-# we will get the product like that
-
-
-nums = [1,2,3,4]
-
-
-# matlab agar humko value chahiye toh index itself count nahi hoga uska left and right ke liye hum prefix and suffix array type kuch bana lenge
-
-
-def productExceptSelf(arr):
-    n = len(nums)
-    answer = [1] * n
+    for i in range(1, n):
+        prefix[i] = prefix[i-1] * array[i-1]
     
-    # store left products
-    prefix = 1
+    for i in range(n-2,-1,-1):
+        suffix[i] = suffix[i+1] * array[i+1]
+
     for i in range(n):
-        answer[i] = prefix
-        prefix *= nums[i]
-        
-    
-    suffix = 1
-    for i in range(n-1, -1, -1):
-        answer[i] *= suffix
-        suffix *= nums[i]
-        
-    return answer
+        ans[i] = prefix[i] * suffix[i]
 
-print(productExceptSelf(nums))
+    return ans
+
+array = [1,2,3,4]
+print(ProductArrayExceptSelf(array=array))
